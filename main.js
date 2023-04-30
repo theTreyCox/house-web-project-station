@@ -1,11 +1,17 @@
-const { app, BrowserWindow, ipcMain, Menu, MenuItem, shell } = require('electron');
+const sharp = require('sharp');
+const { app, BrowserWindow, ipcMain, Menu, MenuItem, shell, nativeImage } = require('electron');
 const path = require('path');
 const fs = require('fs');
+
 
 function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    minWidth: 700,
+    minHeight: 300,
+    fullscreenable: true, // Ensure that fullscreen is allowed (macOS specific)
+    frame: true, // Ensure that the frame is visible, including traffic light buttons (macOS) or minimize, maximize, and close buttons (Windows)
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -33,35 +39,57 @@ app.on('activate', () => {
 
 ipcMain.on('show-image-context-menu', (event, imagePath) => {
   const contextMenu = new Menu();
-  //   contextMenu.append(
-  //     new MenuItem({
-  //       label: 'Open in File Explorer',
-  //       click: () => {
-  //         shell.showItemInFolder(imagePath);
-  //       },
-  //     })
-  //   );
   contextMenu.append(
     new MenuItem({
       label: 'Save Image As...',
-      click: () => {
+      click: async() => {
         const { dialog } = require('electron');
         const dataUrl = imagePath;
 
-        dialog
-          .showSaveDialog({
-            title: 'Save Image As...',
-            filters: [{ name: 'Images', extensions: ['png'] }],
-          })
-          .then((result) => {
-            if (!result.canceled) {
-              const base64Data = dataUrl.replace(/^data:image\/png;base64,/, '');
-              fs.writeFileSync(result.filePath, base64Data, 'base64');
+        // Determine the file format
+        const formatMatch = dataUrl.match(/^data:image\/(.*?);base64,/);
+        const format = formatMatch ? formatMatch[1] : 'png';
+
+        // Convert the data URL to a Buffer
+        const base64Data = dataUrl.replace(/^data:image\/.*?;base64,/, '');
+        const imageBuffer = Buffer.from(base64Data, 'base64');
+
+        // Configure the save dialog filters based on the file format
+        let filters;
+        if (format === 'avif') {
+          filters = [{ name: 'Images', extensions: ['avif'] }];
+        } else if (format === 'webp') {
+          filters = [{ name: 'Images', extensions: ['webp'] }];
+        } else {
+          filters = [{ name: 'Images', extensions: ['png', 'jpg', 'jpeg'] }];
+        }
+
+        // Show the save dialog
+        const result = await dialog.showSaveDialog({
+          title: 'Save Image As...',
+          filters,
+        });
+
+        if (!result.canceled) {
+          try {
+            const sharpImage = sharp(imageBuffer);
+
+            if (format === 'avif') {
+              sharpImage.avif();
+            } else if (format === 'webp') {
+              sharpImage.webp();
+            } else if (format === 'jpg' || format === 'jpeg') {
+              sharpImage.jpeg();
+            } else {
+              sharpImage.png();
             }
-          })
-          .catch((err) => {
+
+            const outputBuffer = await sharpImage.toBuffer();
+            fs.writeFileSync(result.filePath, outputBuffer);
+          } catch (err) {
             console.error('Error while saving image:', err);
-          });
+          }
+        }
       },
     })
   );

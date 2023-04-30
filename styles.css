@@ -498,7 +498,8 @@ button.delete-image-button {
   border-top: none;
 }
 
-#project_status {
+#project_status,
+#state {
   width: 100%;
   background-color: #161f29;
   border: none;
@@ -563,6 +564,102 @@ button#delete-project-button {
   font-size: 1rem;
 }
 
+#save-add-btn,
+#add-project-button,
+#restart-button {
+  background-color: #083908;
+  aspect-ratio: 1/1;
+  margin-right: 0.25rem;
+  border-radius: 0.25rem;
+  color: white;
+  font-size: 1rem;
+}
+
+#add-project-button {
+  background-color: #161f29;
+}
+
+#restart-button {
+  background-color: #4e0606;
+}
+
 div#project-buttons-wrapper {
   padding: 0.5rem;
+}
+
+div#project-buttons-wrapper {
+  padding: 0.5rem;
+}
+
+#projects-container {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+div#project-list-buttons {
+  padding: 0.5rem;
+}
+
+#projects-container {
+  padding-top: 3.5rem;
+}
+
+button.delete-image-button {
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  margin-left: 0.25rem;
+  margin-bottom: 0.25rem;
+  aspect-ratio: 1/1;
+  color: white;
+}
+
+ul#project-list .la {
+  background-color: #161f29;
+  display: inline-flex;
+  font-size: 0.8rem;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  margin-left: 0.25rem;
+  color: white;
+}
+
+ul#project-list .la.status-done {
+  background-color: #083908;
+}
+
+ul#project-list .la.status-in-progress {
+  background-color: #161f29;
+}
+
+ul#project-list .la.status-to-do {
+  background-color: #4e0606;
+}
+
+ul#project-list .la.status-canceled {
+  background-color: #161f29;
+}
+
+body #user-data-path {
+  background-color: #161f29;
+  color: #ffffff2b;
+}
+
+body[data-theme='dark'] #user-data-path {
+  background-color: #161f29;
+  color: #ffffff2b;
+}
+
+span#state-district-title {
+  margin-left: 0.5rem;
+  opacity: 0.5;
+  font-weight: normal;
+}
+
+div#project-details-view.no-prod-designer #team-wrapper {
+  display: none;
+}
+
+span#details-name {
+  color: white;
+  opacity: 0;
 }

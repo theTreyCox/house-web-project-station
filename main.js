@@ -17,9 +17,12 @@ function createWindow() {
       contextIsolation: false,
       preload: path.join(__dirname, 'preload.js'),
     },
+    titleBarStyle: 'customButtonsOnHover',
   });
 
   win.loadFile('index.html');
+
+  // Open dev tools on app load
   win.webContents.openDevTools();
 }
 

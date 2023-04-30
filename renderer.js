@@ -63,18 +63,18 @@ function displayProjectDetails(index) {
   projectDetails.innerHTML = `
       <div id="project-details-view">
         <h3 id="main-project-title">${project.title}</h3>
-        <p><strong>Contact:</strong> ${project.contact}</p>
-        <p><strong>Vendor:</strong> ${project.vendor}</p>
-        <p><strong>Vendor Contact:</strong> ${project.vendor_contact}</p>
-        <p><strong>Designer:</strong> ${project.designer}</p>
-        <p><strong>Production Person:</strong> ${project.production_person}</p>
-        <p><strong>Dev URL:</strong> ${project.dev_url}</p>
-        <p><strong>Staging URL:</strong> ${project.staging_url}</p>
-        <p><strong>Prod URL:</strong> ${project.prod_url}</p>
-        <p><strong>Project Type:</strong> ${project.project_type}</p>
-        <p><strong>Project Status:</strong> ${project.project_status}</p>
-        <p><strong>Drupal Version:</strong> ${project.drupal_version}</p>
-        <p><strong>Notes:</strong></p>
+        <p><strong class="details-name">Contact:</strong> ${project.contact}</p>
+        <p><strong class="details-name">Vendor:</strong> ${project.vendor}</p>
+        <p><strong class="details-name">Vendor Contact:</strong> ${project.vendor_contact}</p>
+        <p><strong class="details-name">Designer:</strong> ${project.designer}</p>
+        <p><strong class="details-name">Production Person:</strong> ${project.production_person}</p>
+        <p><strong class="details-name">Dev URL:</strong> ${project.dev_url}</p>
+        <p><strong class="details-name">Staging URL:</strong> ${project.staging_url}</p>
+        <p><strong class="details-name">Prod URL:</strong> ${project.prod_url}</p>
+        <p><strong class="details-name">Project Type:</strong> ${project.project_type}</p>
+        <p><strong class="details-name">Project Status:</strong> ${project.project_status}</p>
+        <p><strong class="details-name">Drupal Version:</strong> ${project.drupal_version}</p>
+        <p id="notes-area"><strong class="details-name">Notes:</strong></p>
         <p>${project.notes}</p>
         <div id="images-wrapper">
             ${project.images && project.images.length

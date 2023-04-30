@@ -264,7 +264,7 @@ form#project-form {
   padding-bottom: 0.25rem;
 }
 
-#project-details-view strong {
+.details-name {
   display: block;
   text-transform: uppercase;
   font-size: 0.7rem;

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>House Web Project Station</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Your application content goes here -->
+  <section id="app-container">
+    <div id="projects-container">
+      <h2>Projects</h2>
+      <div id="project-list-buttons">
+        <button id="add-project-button">+</button>
+        <button id="restart-button">Restart App</button>
+      </div>
+      <ul id="project-list"></ul>
+    </div>
+    <div id="project-details" class="hidden">
+      <!-- Project information will be displayed here -->
+    </div>
+    <div id="bottom-info">
+      <small id="user-data-path"></small>
+    </div>
+  </section>
+  <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+  <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="node_modules/tinymce/tinymce.min.js"></script>
+  <script src="renderer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,508 @@
+/* Light theme styles (default) */
+
+
+/* body {
+  background-color: white;
+  color: black;
+  font-size: 0.9rem;
+} */
+
+body {
+  background-color: #1c1c1c;
+  color: #f5f5f5;
+}
+
+
+/* Dark theme styles */
+
+body[data-theme='dark'] {
+  background-color: #1c1c1c;
+  color: #f5f5f5;
+}
+
+.small,
+small {
+  font-size: .75em;
+}
+
+#app-container {
+  display: flex;
+}
+
+#projects-container {
+  width: 300px;
+  min-width: 300px;
+  overflow-y: scroll;
+  padding: 1rem;
+  position: fixed;
+  height: 100%;
+  padding-top: 3rem;
+}
+
+#project-details {
+  width: 100%;
+  flex: 1;
+  margin-left: 300px;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.hidden {
+  display: none;
+}
+
+#user-data-path {
+  position: fixed;
+  bottom: 0;
+  z-index: 9;
+  /* background-color: white; */
+  width: 100%;
+  /* color: black; */
+  border-top: 1px solid #333;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 0.125rem;
+  background-color: #1c1c1c;
+  color: #6e6e6e;
+}
+
+body[data-theme='dark'] #user-data-path {
+  background-color: #1c1c1c;
+  color: #6e6e6e;
+}
+
+#project-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+#project-list li:hover {
+  filter: brightness(1.1);
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+  background: #1a232d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #445971;
+  -webkit-border-radius: 1ex;
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+::-webkit-scrollbar-corner {
+  background: #1a232d;
+}
+
+.image-container {
+  width: 50%;
+  padding: 1rem;
+  position: relative;
+}
+
+.image-container img {
+  max-width: 100%;
+}
+
+input,
+textarea {
+  width: 100%;
+  background-color: #272727;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  margin-bottom: 1rem;
+}
+
+#project-form label {
+  font-size: 0.9rem;
+  opacity: 0.5;
+}
+
+button.delete-image-button {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background-color: rgba(255, 255, 255, 0.25);
+  border: none;
+  font-size: 0.8rem;
+  backdrop-filter: blur(5px);
+}
+
+button.delete-image-button:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+#images-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#images-preview .image-container {
+  width: 100%;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+#main-project-title {
+  background-color: #333333;
+  padding: 0.5rem;
+  font-size: 1.125rem;
+  position: fixed;
+  right: 8px;
+  left: 300px;
+  top: 0;
+  z-index: 9;
+}
+
+#project-details>p {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 0.9rem;
+}
+
+#project-details>p:first-of-type {
+  margin-top: 3.5rem;
+}
+
+#project-buttons-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 300px;
+  right: 8px;
+  background-color: #333;
+  padding: 0.5rem;
+}
+
+#images-wrapper {
+  margin-bottom: 3.5rem;
+}
+
+#project-edit-view {
+  padding: 1rem;
+  padding-bottom: 3.5rem;
+}
+
+#project-details-view {
+  padding-bottom: 2.5rem;
+}
+
+#project-details-view p {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+#project-details-view-p-wrapper {
+  margin-top: 3.5rem;
+}
+
+#restart-button {
+  position: fixed;
+  bottom: 2.5rem;
+  border: none;
+  background-color: darkred;
+  color: white;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+#restart-button:hover {
+  opacity: 0.8;
+}
+
+#project-list-buttons {
+  position: fixed;
+  top: 0;
+  top: 0;
+  left: 0;
+  width: calc(300px - 8px);
+  background-color: #333;
+}
+
+#add-project-button {
+  background-color: green;
+  border: none;
+  color: white;
+}
+
+#add-project-button:hover {
+  opacity: 0.8;
+}
+
+form#project-form {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 2.5rem;
+}
+
+#project-details-view {
+  padding-top: 3.5rem;
+  padding-bottom: 2rem;
+}
+
+#project-details>h3:not(#main-project-title) {
+  font-size: 1.125rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+}
+
+#projects-container>h2 {
+  font-size: 1.125rem;
+}
+
+#project-details-view p {
+  margin-bottom: 0.5rem;
+}
+
+#project-list>li {
+  border-top: 1px solid #333;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+#project-details-view strong {
+  display: block;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  opacity: 0.5;
+  font-weight: normal;
+}
+
+
+/* .tox.tox-tinymce {
+  filter: grayscale(1);
+} */
+
+#project-details a {
+  color: white;
+}
+
+#project-details a:hover {
+  opacity: 0.8;
+}
+
+#edit-project-button {
+  background-color: white;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#delete-project-button {
+  background-color: darkred;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+}
+
+#save-add-btn {
+  background-color: green;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+div#projects-container>h2 {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+h3#main-project-title,
+#project-details>h3 {
+  font-size: 0.8rem !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-left: 1rem;
+}
+
+#project-form label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 0.125rem;
+}
+
+input,
+textarea {
+  padding: 0.125rem;
+  margin-bottom: 0.5rem;
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+  padding-left: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.tox-promotion {
+  display: none !important;
+}
+
+span.tox-statusbar__branding {
+  display: none !important;
+}
+
+form#project-form {
+  background-color: #222f3e;
+}
+
+input,
+textarea {
+  background-color: #161f29;
+  border-radius: 0.5rem;
+}
+
+input#images {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#project-details {
+  background-color: #161f29;
+}
+
+#project-details>h3:not(#main-project-title) {
+  padding-bottom: 0.5rem;
+}
+
+#project-buttons-wrapper {
+  background-color: #161f29;
+}
+
+#projects-container {
+  background-color: #161f29;
+}
+
+#project-details-view {
+  background-color: #222f3e;
+}
+
+body {
+  background-color: #222f3e;
+}
+
+body[data-theme='dark'] {
+  background-color: #222f3e;
+}
+
+#main-project-title {
+  background-color: #161f29;
+}
+
+h3#main-project-title {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+#project-list-buttons {
+  background-color: #222f3e;
+}
+
+#project-list>li {
+  background-color: #222f3e;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+#project-buttons-wrapper {
+  padding: 0;
+}
+
+#project-buttons-wrapper {
+  z-index: 999;
+}
+
+#restart-button {
+  position: relative;
+  bottom: auto;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+#add-project-button {
+  background-color: green;
+  border: none;
+  color: white;
+  display: inline-flex;
+  height: 2rem;
+  align-items: center;
+}
+
+div#project-list-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+div#project-buttons-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+button {
+  height: 2rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.image-container>img {
+  object-fit: contain;
+  border: 1px dotted rgba(255, 255, 255, 0.15);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+button.delete-image-button {
+  border-bottom-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  overflow: hidden;
+}
+
+#project-list>li {
+  border-top: none;
+}
+
+#project_status {
+  width: 100%;
+  background-color: #161f29;
+  border: none;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}

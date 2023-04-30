@@ -2,6 +2,7 @@ const { ipcRenderer } = require('electron');
 const fs = require('fs');
 const pdfMake = require('pdfmake');
 const tinymce = require('tinymce');
+require('./iconmanagement');
 
 // Application logic for managing projects, saving to disk, and exporting as PDF
 
@@ -50,6 +51,7 @@ function displayProjects() {
     console.log("displayProjects() forEach loop: ", index);
     const listItem = document.createElement('li');
     listItem.textContent = project.title;
+    listItem.title = `View ${project.title} Details`
     listItem.addEventListener('click', () => displayProjectDetails(index));
     projectList.appendChild(listItem);
   });
@@ -63,17 +65,16 @@ function displayProjectDetails(index) {
   projectDetails.innerHTML = `
       <div id="project-details-view">
         <h3 id="main-project-title">${project.title}</h3>
+        <div class="team-wrapper"><p><span class="team-wrapper-prod"><i>Production:</i> ${project.production_person}</span><span class="details-name"> | </span><span class="team-wrapper-design"><i>Design:</i> ${project.designer}</span></p></div>
+        <p><strong class="details-name">Project Status:</strong> ${project.project_status}</p>
         <p><strong class="details-name">Contact:</strong> ${project.contact}</p>
-        <p><strong class="details-name">Vendor:</strong> ${project.vendor}</p>
+        <p><strong class="details-name">CMS Vendor:</strong> ${project.vendor}</p>
         <p><strong class="details-name">Vendor Contact:</strong> ${project.vendor_contact}</p>
-        <p><strong class="details-name">Designer:</strong> ${project.designer}</p>
-        <p><strong class="details-name">Production Person:</strong> ${project.production_person}</p>
+        <p><strong class="details-name">Drupal Version:</strong> ${project.drupal_version}</p>
         <p><strong class="details-name">Dev URL:</strong> ${project.dev_url}</p>
         <p><strong class="details-name">Staging URL:</strong> ${project.staging_url}</p>
         <p><strong class="details-name">Prod URL:</strong> ${project.prod_url}</p>
         <p><strong class="details-name">Project Type:</strong> ${project.project_type}</p>
-        <p><strong class="details-name">Project Status:</strong> ${project.project_status}</p>
-        <p><strong class="details-name">Drupal Version:</strong> ${project.drupal_version}</p>
         <p id="notes-area"><strong class="details-name">Notes:</strong></p>
         <p>${project.notes}</p>
         <div id="images-wrapper">
@@ -90,8 +91,12 @@ function displayProjectDetails(index) {
         </div>
       </div>
       <div id="project-buttons-wrapper">
-        <button id="edit-project-button">Edit</button>
-        <button id="delete-project-button">Delete</button>
+        <button id="edit-project-button" title="Edit Project Details">
+            <i class="las la-edit"></i>
+        </button>
+        <button id="delete-project-button" title="Delete Project">
+            <i class="las la-trash-alt"></i>
+        </button>
       </div>
     `;
 
@@ -129,6 +134,7 @@ function displayProjectDetails(index) {
 function addProject() {
   console.log("addProject() function called");
   showProjectForm();
+  tinymce.remove('#notes');
   tinymce.init({
     selector: '#notes',
     skin: 'oxide-dark',
@@ -140,6 +146,7 @@ function addProject() {
 function editProject(index) {
   const project = projects[index];
   showProjectForm(project, index);
+  tinymce.remove('#notes');
   tinymce.init({
     selector: '#notes',
     skin: 'oxide-dark',
@@ -165,8 +172,13 @@ function handleFormSubmit(isEdit, index, updatedProject) {
     updatedProject.notes = tinymce.activeEditor.getContent();
     saveProjects();
     displayProjects();
-    projectDetails.classList.add('hidden');
+    // projectDetails.classList.add('hidden');
     tinymce.remove('#notes');
+    tinymce.init({
+        selector: '#notes',
+        skin: 'oxide-dark',
+        content_css: 'dark'
+      });
     console.log("handleFormSubmit() called");
 }
 
@@ -188,20 +200,28 @@ function showProjectForm(project = null, index = null) {
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" value="${project ? project.title : ''}" />
             <br />
-            <label for="contact">Contact:</label>
-            <input type="text" id="contact" name="contact" value="${project ? project.contact : ''}" />
-            <br />
-            <label for="vendor">Vendor:</label>
-            <input type="text" id="vendor" name="vendor" value="${project ? project.vendor : ''}" />
-            <br />
-            <label for="vendor_contact">Vendor Contact:</label>
-            <input type="text" id="vendor_contact" name="vendor_contact" value="${project ? project.vendor_contact : ''}" />
+            <label for="project_status">Project Status:</label>
+            <select id="project_status" name="project_status">
+                <option value="To-Do"${project && project.project_status === 'To-Do' ? ' selected' : ''}>To-Do</option>
+                <option value="In Progress"${project && project.project_status === 'In Progress' ? ' selected' : ''}>In Progress</option>
+                <option value="Canceled"${project && project.project_status === 'Canceled' ? ' selected' : ''}>Canceled</option>
+                <option value="Done"${project && project.project_status === 'Done' ? ' selected' : ''}>Done</option>
+            </select>
             <br />
             <label for="designer">Designer:</label>
             <input type="text" id="designer" name="designer" value="${project ? project.designer : ''}" />
             <br />
             <label for="production_person">Production Person:</label>
             <input type="text" id="production_person" name="production_person" value="${project ? project.production_person : ''}" />
+            <br />
+            <label for="contact">Contact:</label>
+            <input type="text" id="contact" name="contact" value="${project ? project.contact : ''}" />
+            <br />
+            <label for="vendor">CMS Vendor:</label>
+            <input type="text" id="vendor" name="vendor" value="${project ? project.vendor : ''}" />
+            <br />
+            <label for="vendor_contact">Vendor Contact:</label>
+            <input type="text" id="vendor_contact" name="vendor_contact" value="${project ? project.vendor_contact : ''}" />
             <br />
             <label for="drupal_version">Drupal Version:</label>
             <input type="text" id="drupal_version" name="drupal_version" value="${project ? project.drupal_version : ''}" />
@@ -217,14 +237,6 @@ function showProjectForm(project = null, index = null) {
             <br />
             <label for="project_type">Project Type:</label>
             <input type="text" id="project_type" name="project_type" value="${project ? project.project_type : ''}" />
-            <br />
-            <label for="project_status">Project Status:</label>
-            <select id="project_status" name="project_status">
-                <option value="To-Do"${project && project.project_status === 'To-Do' ? ' selected' : ''}>To-Do</option>
-                <option value="In Progress"${project && project.project_status === 'In Progress' ? ' selected' : ''}>In Progress</option>
-                <option value="Canceled"${project && project.project_status === 'Canceled' ? ' selected' : ''}>Canceled</option>
-                <option value="Done"${project && project.project_status === 'Done' ? ' selected' : ''}>Done</option>
-            </select>
             <br />
             <label for="notes">Notes:</label>
             <textarea id="notes" name="notes">${project ? project.notes : ''}</textarea>
@@ -244,12 +256,12 @@ function showProjectForm(project = null, index = null) {
             </div>
         <br />
         <div id="project-buttons-wrapper">
-            <button id="save-add-btn" type="submit">${isEdit ? 'Save' : 'Add'} Project</button>
+            <button id="save-add-btn" type="submit">
+                ${isEdit ? '<i class="las la-save"></i> Save' : '<i class="las la-plus"></i> Add'} Project
+            </button>
         </div>
         </form>
     `;
-
-  projectDetails.classList.remove('hidden');
 
   const projectForm = document.getElementById('project-form');
   projectForm.addEventListener('submit', (event) => {
@@ -301,7 +313,7 @@ function showProjectForm(project = null, index = null) {
     saveProjects();
     
     displayProjects();
-    projectDetails.classList.add('hidden');
+    // projectDetails.classList.add('hidden');
   });
 }
 

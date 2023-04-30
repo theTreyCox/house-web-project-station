@@ -10,6 +10,7 @@
 body {
   background-color: #1c1c1c;
   color: #f5f5f5;
+  font-size: 0.9rem;
 }
 
 
@@ -505,4 +506,63 @@ button.delete-image-button {
   border-radius: 0.5rem;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.team-wrapper>p {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.team-wrapper span.details-name {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.team-wrapper {
+  background-color: #161f29;
+  width: fit-content;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
+  margin-bottom: 0;
+  display: flex;
+  padding-left: 0.25rem;
+  border-radius: 0.5rem;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+.team-wrapper i {
+  text-decoration: none;
+  font-style: normal !important;
+  opacity: 0.5;
+}
+
+.team-wrapper {
+  margin-bottom: 0.5rem;
+}
+
+#edit-project-button {
+  background-color: #222f3e;
+  aspect-ratio: 1/1;
+  margin-right: 0.25rem;
+  border-radius: 0.25rem;
+  color: white;
+  font-size: 1rem;
+}
+
+button#delete-project-button {
+  aspect-ratio: 1/1;
+  background-color: #4e0606;
+  margin-right: 0.25rem;
+  border-radius: 0.25rem;
+  color: white;
+  font-size: 1rem;
+}
+
+div#project-buttons-wrapper {
+  padding: 0.5rem;
 }

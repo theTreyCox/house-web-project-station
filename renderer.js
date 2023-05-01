@@ -129,7 +129,7 @@ function displayProjectDetails(index) {
         </div>
         <p><strong class="details-name">Project Status:</strong> ${project.project_status}</p>
         <p><strong class="details-name">Project Type:</strong> ${project.project_type}</p>
-        <p><strong class="details-name">Contact:</strong> ${project.contact}</p>
+        <p><strong class="details-name">Project Contact:</strong> ${project.contact}</p>
         <p><strong class="details-name">CMS Vendor:</strong> ${project.vendor}</p>
         <p><strong class="details-name">CMS Vendor Contact:</strong> ${project.vendor_contact}</p>
         <p><strong class="details-name">Drupal Version:</strong> ${project.drupal_version}</p>
@@ -288,7 +288,7 @@ function showProjectForm(project = null, index = null) {
             <label for="production_person">Production Person:</label>
             <input type="text" id="production_person" name="production_person" value="${project ? project.production_person : ''}" />
             <br />
-            <label for="contact">Contact:</label>
+            <label for="contact">Project Contact:</label>
             <input type="text" id="contact" name="contact" value="${project ? project.contact : ''}" />
             <br />
             <label for="state">State:</label>

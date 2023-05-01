@@ -16,3 +16,6 @@ build/
 
 # Visual Studio Code settings
 .vscode/
+
+#electron-builder
+electron-builder.js

@@ -743,3 +743,12 @@ div#project-list-buttons {
 #projects-container {
   padding-top: 3.75rem;
 }
+
+form#project-form {
+  padding-top: 0.5rem;
+}
+
+input {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}

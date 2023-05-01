@@ -290,6 +290,9 @@ function showProjectForm(project = null, index = null) {
             <label for="production_person">Production Person:</label>
             <input type="text" id="production_person" name="production_person" value="${project ? project.production_person : ''}" />
             <br />
+            <label for="project_type">Project Type:</label>
+            <input type="text" id="project_type" name="project_type" value="${project ? project.project_type : ''}" />
+            <br />
             <label for="contact">Project Contact:</label>
             <input type="text" id="contact" name="contact" value="${project ? project.contact : ''}" />
             <br />
@@ -363,7 +366,7 @@ function showProjectForm(project = null, index = null) {
             <label for="vendor">CMS Vendor:</label>
             <input type="text" id="vendor" name="vendor" value="${project ? project.vendor : ''}" />
             <br />
-            <label for="vendor_contact">Vendor Contact:</label>
+            <label for="vendor_contact">CMS Vendor Contact:</label>
             <input type="text" id="vendor_contact" name="vendor_contact" value="${project ? project.vendor_contact : ''}" />
             <br />
             <label for="drupal_version">Drupal Version:</label>
@@ -377,9 +380,6 @@ function showProjectForm(project = null, index = null) {
             <br />
             <label for="prod_url">Prod URL:</label>
             <input type="text" id="prod_url" name="prod_url" value="${project ? project.prod_url : ''}" />
-            <br />
-            <label for="project_type">Project Type:</label>
-            <input type="text" id="project_type" name="project_type" value="${project ? project.project_type : ''}" />
             <br />
             <label for="notes">Notes:</label>
             <textarea id="notes" name="notes">${project ? project.notes : ''}</textarea>
@@ -476,7 +476,7 @@ addProjectButton.addEventListener('click', addProject);
 
 // Add this to the bottom of the renderer.js file, after the last event listener
 const userDataPathElement = document.getElementById('user-data-path');
-userDataPathElement.textContent = `©2023, Version ${appVersion}. Data saved in: ${ipcRenderer.sendSync('get-user-data-path')}/projects.json`;
+userDataPathElement.textContent = `©2023 Trey Cox, Version ${appVersion}. Data saved in: ${ipcRenderer.sendSync('get-user-data-path')}/projects.json`;
 
 function displayTeamInfo(production_person, designer) {
     const projectDetailsView = document.getElementById('project-details-view');

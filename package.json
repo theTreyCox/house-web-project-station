@@ -1,10 +1,12 @@
 {
   "name": "house-web-project-station",
-  "version": "1.0.2 beta",
+  "version": "1.0.3",
   "description": "Application for keeping track of House Web Services projects.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
     "build": "electron-builder"
   },
   "author": "Trey Cox",
@@ -12,6 +14,19 @@
   "devDependencies": {
     "electron": "^24.1.3",
     "electron-builder": "^23.6.0"
+  },
+  "build": {
+    "appId": "com.treycoxcreative.housewebprojectstation",
+    "productName": "House Web Project Station",
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "icon": "build/icons/icon.icns"
+    },
+    "win": {
+      "icon": "build/icons/icon.ico"
+    }
   },
   "dependencies": {
     "bootstrap": "^5.2.3",

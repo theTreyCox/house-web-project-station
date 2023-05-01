@@ -722,3 +722,24 @@ div#projects-container>h2 {
 div#project-list-buttons {
   z-index: 99;
 }
+
+div#project-list-buttons {
+  border-bottom: 1px solid #1e2b39;
+}
+
+#project-buttons-wrapper {
+  border-top: 1px solid #1e2b39;
+  border-left: none;
+}
+
+#projects-container {
+  border-right: 1px solid #1e2b39;
+}
+
+#projects-container {
+  padding-left: 1rem;
+}
+
+#projects-container {
+  padding-top: 3.75rem;
+}

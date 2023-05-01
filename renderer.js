@@ -3,6 +3,8 @@ const fs = require('fs');
 const pdfMake = require('pdfmake');
 const tinymce = require('tinymce');
 require('./iconmanagement');
+const appVersion = ipcRenderer.sendSync('get-app-version');
+console.log('App version:', appVersion);
 
 // Application logic for managing projects, saving to disk, and exporting as PDF
 
@@ -474,7 +476,7 @@ addProjectButton.addEventListener('click', addProject);
 
 // Add this to the bottom of the renderer.js file, after the last event listener
 const userDataPathElement = document.getElementById('user-data-path');
-userDataPathElement.textContent = `Data saved in: ${ipcRenderer.sendSync('get-user-data-path')}`;
+userDataPathElement.textContent = `©2023, Version ${appVersion}. Data saved in: ${ipcRenderer.sendSync('get-user-data-path')}/projects.json`;
 
 function displayTeamInfo(production_person, designer) {
     const projectDetailsView = document.getElementById('project-details-view');

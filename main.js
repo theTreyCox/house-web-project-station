@@ -154,3 +154,8 @@ ipcMain.on('confirm-delete-image', (event, projectIndex, imageIndex) => {
     }
   });
 });
+
+ipcMain.on('get-app-version', (event) => {
+  const appVersion = app.getVersion();
+  event.returnValue = appVersion;
+});

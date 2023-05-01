@@ -1,6 +1,6 @@
 {
   "name": "house-web-project-station",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Application for keeping track of House Web Services projects.",
   "main": "main.js",
   "scripts": {

@@ -59,11 +59,23 @@ function displayProjects() {
     listItem.appendChild(statusSpan);
 
     listItem.title = `View ${project.title} (${project.project_status})`
-    listItem.addEventListener('click', () => displayProjectDetails(index));
+    listItem.addEventListener('click', function() {
+      displayProjectDetails(index);
+
+      // Remove the 'active' class from all list items
+      const allListItems = projectList.getElementsByTagName('li');
+      for (let i = 0; i < allListItems.length; i++) {
+        allListItems[i].classList.remove('active');
+      }
+
+      // Add the 'active' class to the clicked list item
+      this.classList.add('active');
+    });
     projectList.appendChild(listItem);
     updateProjectListItems();
   });
 }
+
 
 function getIconClassName(status) {
   switch (status) {
@@ -76,7 +88,7 @@ function getIconClassName(status) {
     case 'Canceled':
       return 'la la-times-circle';
     default:
-      return '';
+      return 'no-icon';
   }
 }
 
@@ -91,7 +103,7 @@ function getStatusColor(status) {
     case 'Canceled':
       return 'status-canceled';
     default:
-      return '';
+      return 'status-none';
   }
 }
 
@@ -171,11 +183,14 @@ function displayProjectDetails(index) {
   if (project.images && project.images.length) {
     const deleteImageButtons = document.querySelectorAll('.delete-image-button');
     deleteImageButtons.forEach((deleteImageButton) => {
-      deleteImageButton.addEventListener('click', () => {
+    deleteImageButton.addEventListener('click', () => {
         const imageIndex = parseInt(deleteImageButton.dataset.index);
-        deleteImage(index, imageIndex);
-      });
+        ipcRenderer.send('confirm-delete-image', index, imageIndex);
+        });
     });
+    ipcRenderer.on('confirmed-delete-image', (event, projectIndex, imageIndex) => {
+        deleteImage(projectIndex, imageIndex);
+      });
   }
 
   displayTeamInfo(project.production_person, project.designer);
@@ -208,11 +223,16 @@ function editProject(index) {
 
 // Delete a project
 function deleteProject(index) {
-  projects.splice(index, 1);
-  saveProjects();
-  displayProjects();
-  projectDetails.classList.add('hidden');
+    ipcRenderer.send('confirm-delete', index);
 }
+
+ipcRenderer.on('confirmed-delete', (event, index) => {
+    projects.splice(index, 1);
+    saveProjects();
+    displayProjects();
+    projectDetails.classList.add('hidden');
+  });
+  
 
 function handleFormSubmit(isEdit, index, updatedProject) {
     if (isEdit) {
@@ -255,6 +275,7 @@ function showProjectForm(project = null, index = null) {
             <br />
             <label for="project_status">Project Status:</label>
             <select id="project_status" name="project_status">
+                <option value="None"${project && project.project_status === 'None' ? ' selected' : ''}>None</option>
                 <option value="To-Do"${project && project.project_status === 'To-Do' ? ' selected' : ''}>To-Do</option>
                 <option value="In Progress"${project && project.project_status === 'In Progress' ? ' selected' : ''}>In Progress</option>
                 <option value="Canceled"${project && project.project_status === 'Canceled' ? ' selected' : ''}>Canceled</option>
@@ -520,7 +541,7 @@ function updateProjectListItems() {
     const projectListItems = document.querySelectorAll('#project-list > li');
     if (projectListItems.length > 0) {
       projectListItems.forEach(item => {
-        if (!item.innerText.trim() || item.innerText.trim() === 'To-Do' || item.innerText.trim() === 'Canceled' || item.innerText.trim() === 'In Progress' || item.innerText.trim() === 'Done') {
+        if (!item.innerText.trim() || item.innerText.trim() === 'To-Do' || item.innerText.trim() === 'Canceled' || item.innerText.trim() === 'In Progress' || item.innerText.trim() === 'Done' || item.innerText.trim() === 'None') {
           item.innerText = 'Untitled Project';
         }
       });

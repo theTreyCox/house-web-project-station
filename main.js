@@ -1,5 +1,5 @@
 const sharp = require('sharp');
-const { app, BrowserWindow, ipcMain, Menu, MenuItem, shell, nativeImage } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu, MenuItem, shell, nativeImage, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
@@ -115,4 +115,42 @@ ipcMain.on('restart-app', () => {
 // Add IPC listener for getting the user data path
 ipcMain.on('get-user-data-path', (event) => {
   event.returnValue = app.getPath('userData');
+});
+
+ipcMain.on('confirm-delete', (event, index) => {
+  const focusedWindow = BrowserWindow.getFocusedWindow();
+
+  const options = {
+    type: 'warning',
+    buttons: ['Cancel', 'Delete'],
+    defaultId: 0,
+    cancelId: 0,
+    title: 'Confirm Delete',
+    message: 'Are you sure you want to delete this project?',
+  };
+
+  dialog.showMessageBox(focusedWindow, options).then((result) => {
+    if (result.response === 1) {
+      event.sender.send('confirmed-delete', index);
+    }
+  });
+});
+
+ipcMain.on('confirm-delete-image', (event, projectIndex, imageIndex) => {
+  const focusedWindow = BrowserWindow.getFocusedWindow();
+
+  const options = {
+    type: 'warning',
+    buttons: ['Cancel', 'Delete'],
+    defaultId: 0,
+    cancelId: 0,
+    title: 'Confirm Image Delete',
+    message: 'Are you sure you want to delete this image?',
+  };
+
+  dialog.showMessageBox(focusedWindow, options).then((result) => {
+    if (result.response === 1) {
+      event.sender.send('confirmed-delete-image', projectIndex, imageIndex);
+    }
+  });
 });

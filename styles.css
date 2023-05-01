@@ -85,17 +85,17 @@ body[data-theme='dark'] #user-data-path {
 ::-webkit-scrollbar {
   height: 8px;
   width: 8px;
-  background: #1a232d;
+  background: rgba(0, 0, 0, 0.125);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #445971;
+  background: #222f3e80;
   -webkit-border-radius: 1ex;
-  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+  /* -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75); */
 }
 
 ::-webkit-scrollbar-corner {
-  background: #1a232d;
+  background: rgba(0, 0, 0, 0.125);
 }
 
 .image-container {
@@ -460,6 +460,7 @@ div#project-list-buttons {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-direction: row-reverse;
 }
 
 div#project-buttons-wrapper {
@@ -616,7 +617,7 @@ button.delete-image-button {
 ul#project-list .la {
   background-color: #161f29;
   display: inline-flex;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   padding: 0.25rem;
   border-radius: 0.25rem;
   margin-left: 0.25rem;
@@ -662,4 +663,34 @@ div#project-details-view.no-prod-designer #team-wrapper {
 span#details-name {
   color: white;
   opacity: 0;
+}
+
+#main-project-title {
+  right: 0;
+}
+
+#project-list-buttons {
+  width: 300px;
+}
+
+div#project-list-buttons {
+  border-right: 1px solid #1e2b39;
+}
+
+body {
+  background-image: url('images/logo.png');
+  background-size: 35%;
+  background-repeat: no-repeat;
+  background-position-x: calc(50% + 150px);
+  background-position-y: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+div#projects-container>h2 {
+  padding-left: 0.5rem;
+}
+
+#project-list li.active {
+  filter: brightness(1.5);
 }

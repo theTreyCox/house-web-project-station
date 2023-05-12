@@ -36,7 +36,10 @@
       "identity": "Developer ID Application: Timothy Cox (PD7LM8R8JP)"
     },
     "win": {
-      "icon": "build/icons/icon.ico"
+      "icon": "build/icons/icon.ico",
+      "target": [
+        "nsis"
+      ]
     },
     "afterSign": "electron-builder.js"
   },

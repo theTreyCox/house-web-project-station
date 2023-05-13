@@ -1,3 +1,13 @@
-macOS Builds: The 'electron-builder.js' file needs to be added to the root of the application folder. Also, "aftersign": "electron-builder.js" should be added to the 'build' section of the package.json file. 
+# Electron Build Instructions
 
-Windows Builds: The 'electron-builder.js' file should be removed as well as the reference to it in package.json before Windows application build is attempted, or else it will fail.
+## macOS Builds
+
+For macOS builds, the `electron-builder.js` file needs to be added to the root of the application folder. Also, the following line should be added to the `build` section of the `package.json` file:
+
+```json
+"aftersign": "electron-builder.js"
+```
+
+## Windows Builds
+
+For Windows builds, the `electron-builder.js` file should be removed, as well as the reference to it in the `package.json` file, before attempting to build the Windows application. If not removed, the build process will fail.

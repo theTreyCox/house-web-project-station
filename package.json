@@ -41,7 +41,10 @@
         "nsis"
       ]
     },
-    "afterSign": "electron-builder.js"
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
